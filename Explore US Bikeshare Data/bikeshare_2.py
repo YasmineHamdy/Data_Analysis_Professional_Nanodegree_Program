@@ -170,6 +170,19 @@ def user_stats(df):
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
 
+def display_data(df):
+    """Displays raw data."""
+    current_index = 0
+    while True:
+        input_string= 'first' if current_index == 0 else 'next'
+        view_data = input(f'\n Do you want to see the {input_string} 5 rows of data? Enter yes or no.\n')
+        
+        if view_data.lower() == 'yes':
+            print(df[current_index: current_index + 5])
+            current_index += 5
+        else:
+            break
+        
 def main():
     while True:
         city, month, day = get_filters()
@@ -179,7 +192,9 @@ def main():
         station_stats(df)
         trip_duration_stats(df)
         user_stats(df)
-
+        display_data(df)
+       
+        
         restart = input('\nWould you like to restart? Enter yes or no.\n')
         if restart.lower() != 'yes':
             break
